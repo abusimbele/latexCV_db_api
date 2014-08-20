@@ -86,9 +86,28 @@
 		</table>
 		<table name="education" >
 			<column name="education_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="begin_date" type="date" jt="91" mandatory="y" />
+			<column name="end_date" type="date" jt="91" mandatory="y" />
+			<column name="educational_institution" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="degree" type="float" length="3" decimal="2" jt="7" unsigned="y" >
+				<comment><![CDATA[ToDo: realtion to other table?]]></comment>
+			</column>
+			<column name="user" type="int" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_education" unique="PRIMARY_KEY" >
 				<column name="education_id" />
 			</index>
+			<index name="idx_education" unique="NORMAL" >
+				<column name="user" />
+			</index>
+			<index name="idx_education_0" unique="NORMAL" >
+				<column name="educational_institution" />
+			</index>
+			<fk name="fk_education" to_schema="application" to_table="Users" >
+				<fk_column name="user" pk="user_id" />
+			</fk>
+			<fk name="fk_education_0" to_schema="application" to_table="instituition" >
+				<fk_column name="educational_institution" pk="institution_id" />
+			</fk>
 			<storage><![CDATA[engine=InnoDB]]></storage>
 		</table>
 		<table name="email_address_user_intermediate" >
@@ -145,30 +164,39 @@
 		<table name="instituition" >
 			<column name="institution_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
 			<column name="name" type="varchar" length="60" jt="12" />
+			<column name="institution_type" type="int" jt="4" unsigned="y" />
+			<column name="graduation" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="address" type="int" jt="4" mandatory="y" unsigned="y" />
 			<index name="pk_instituition" unique="PRIMARY_KEY" >
 				<column name="institution_id" />
 			</index>
-			<storage><![CDATA[engine=InnoDB]]></storage>
-		</table>
-		<table name="institution_address_intermediate" >
-			<column name="institution_address_intermediate_id" type="int" length="100" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
-			<column name="address" type="int" jt="4" mandatory="y" unsigned="y" />
-			<column name="institution" type="int" jt="4" mandatory="y" unsigned="y" />
-			<index name="pk_institution_address_intermediate" unique="PRIMARY_KEY" >
-				<column name="institution_address_intermediate_id" />
+			<index name="idx_instituition" unique="NORMAL" >
+				<column name="institution_type" />
 			</index>
-			<index name="idx_institution_address_intermediate" unique="NORMAL" >
+			<index name="idx_instituition_0" unique="NORMAL" >
+				<column name="graduation" />
+			</index>
+			<index name="idx_instituition_1" unique="NORMAL" >
 				<column name="address" />
 			</index>
-			<index name="idx_institution_address_intermediate_0" unique="NORMAL" >
-				<column name="institution" />
-			</index>
-			<fk name="fk_institution_address_intermediate" to_schema="application" to_table="Address" >
+			<fk name="fk_instituition" to_schema="application" to_table="institution_type" >
+				<fk_column name="institution_type" pk="institution_type_id" />
+			</fk>
+			<fk name="fk_instituition_0" to_schema="application" to_table="graduation" >
+				<fk_column name="graduation" pk="graduation_id" />
+			</fk>
+			<fk name="fk_instituition_1" to_schema="application" to_table="Address" >
 				<fk_column name="address" pk="address_id" />
 			</fk>
-			<fk name="fk_institution_address_intermediate_0" to_schema="application" to_table="instituition" >
-				<fk_column name="institution" pk="institution_id" />
-			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="institution_type" >
+			<column name="institution_type_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="name" type="varchar" length="50" jt="12" />
+			<column name="description" type="varchar" length="200" jt="12" mandatory="y" />
+			<index name="pk_institution_type" unique="PRIMARY_KEY" >
+				<column name="institution_type_id" />
+			</index>
 			<storage><![CDATA[engine=InnoDB]]></storage>
 		</table>
 		<table name="organizations" >
@@ -298,26 +326,26 @@
 	</schema>
 	<connector name="MySql" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.25-bin.jar" host="localhost" port="3306" user="root" schema_mapping="" />
 	<layout id="Layout3900696" name="application" show_relation_columns="y" >
-		<entity schema="application" name="social_platforms" color="b2cdf7" x="1305" y="45" />
-		<entity schema="application" name="organizations" color="b2cdf7" x="990" y="225" />
-		<entity schema="application" name="user_social_platforms_intermediate" color="b2cdf7" x="750" y="60" />
-		<entity schema="application" name="users_skills_intermediate" color="b2cdf7" x="300" y="390" />
-		<entity schema="application" name="Skills" color="f5ddbf" x="345" y="540" />
-		<entity schema="application" name="user_address_intermediate" color="b2cdf7" x="210" y="240" />
-		<entity schema="application" name="email_address_user_intermediate" color="b2cdf7" x="315" y="60" />
-		<entity schema="application" name="email_addresses" color="b2cdf7" x="120" y="60" />
-		<entity schema="application" name="Professional_experience" color="f5ddbf" x="690" y="240" />
-		<entity schema="application" name="professional_experience_tasks_intermediate" color="b2cdf7" x="810" y="435" />
-		<entity schema="application" name="Tasks" color="f5ddbf" x="1200" y="450" />
-		<entity schema="application" name="sectors" color="b2cdf7" x="1215" y="285" />
-		<entity schema="application" name="Grades" color="f5ddbf" x="120" y="435" />
-		<entity schema="application" name="Address" color="f5ddbf" x="45" y="195" />
-		<entity schema="application" name="institution_address_intermediate" color="b2cdf7" x="45" y="675" />
-		<entity schema="application" name="instituition" color="b2cdf7" x="525" y="690" />
-		<entity schema="application" name="Users" color="f5ddbf" x="510" y="270" />
-		<entity schema="application" name="graduation" color="b2cdf7" x="1215" y="675" />
-		<entity schema="application" name="education" color="b2cdf7" x="1005" y="585" />
-		<entity schema="application" name="gender" color="b2cdf7" x="690" y="420" />
+		<entity schema="application" name="organizations" color="b2cdf7" x="1005" y="210" />
+		<entity schema="application" name="user_social_platforms_intermediate" color="b2cdf7" x="765" y="45" />
+		<entity schema="application" name="email_address_user_intermediate" color="b2cdf7" x="330" y="45" />
+		<entity schema="application" name="email_addresses" color="b2cdf7" x="135" y="45" />
+		<entity schema="application" name="Professional_experience" color="f5ddbf" x="705" y="225" />
+		<entity schema="application" name="professional_experience_tasks_intermediate" color="b2cdf7" x="825" y="420" />
+		<entity schema="application" name="Tasks" color="f5ddbf" x="1215" y="435" />
+		<entity schema="application" name="sectors" color="b2cdf7" x="1230" y="270" />
+		<entity schema="application" name="gender" color="b2cdf7" x="690" y="405" />
+		<entity schema="application" name="social_platforms" color="b2cdf7" x="1185" y="45" />
+		<entity schema="application" name="user_address_intermediate" color="b2cdf7" x="240" y="210" />
+		<entity schema="application" name="users_skills_intermediate" color="b2cdf7" x="360" y="405" />
+		<entity schema="application" name="Grades" color="f5ddbf" x="225" y="360" />
+		<entity schema="application" name="Skills" color="f5ddbf" x="225" y="465" />
+		<entity schema="application" name="Address" color="f5ddbf" x="45" y="255" />
+		<entity schema="application" name="Users" color="f5ddbf" x="525" y="255" />
+		<entity schema="application" name="graduation" color="b2cdf7" x="255" y="810" />
+		<entity schema="application" name="instituition" color="b2cdf7" x="510" y="645" />
+		<entity schema="application" name="institution_type" color="b2cdf7" x="225" y="690" />
+		<entity schema="application" name="education" color="b2cdf7" x="780" y="600" />
 		<browser id="Browse7010656" name="Address" >
 			<browse_table schema="application" entity="Address" x="10" y="10" width="280" height="216" />
 		</browser>
