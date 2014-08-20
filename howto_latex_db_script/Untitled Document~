@@ -1,0 +1,13 @@
+************
+How to's
+************
+
+
+[0.) $PATH needs texlive - folder]
+1.) latexdb 'filename' without ending .tex
+2.) rename transformed file to 'filename'.tex 
+3.) start texstudio with console
+
+
+INSTALL extra modules for Texlive:
+1.) use absolute path for tlmgr  
