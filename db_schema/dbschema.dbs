@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MySql" id="Project3865881" database="MySql" >
+	<schema name="application" catalogname="application" defo="y" >
+		<table name="Address" >
+			<column name="address_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="street_name" type="varchar" length="90" jt="12" mandatory="y" />
+			<column name="street_number" type="varchar" length="10" jt="12" mandatory="y" />
+			<column name="zipcode" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="city_name" type="varchar" length="90" jt="12" mandatory="y" />
+			<column name="country_name" type="varchar" length="60" jt="12" mandatory="y" />
+			<column name="country_code" type="varchar" length="3" jt="12" mandatory="y" />
+			<index name="pk_address" unique="PRIMARY_KEY" >
+				<column name="address_id" />
+			</index>
+			<index name="fk_Address_1_idx" unique="NORMAL" >
+				<column name="address_id" />
+				<column name="street_name" />
+				<column name="street_number" />
+				<column name="zipcode" />
+				<column name="city_name" />
+				<column name="country_name" />
+				<column name="country_code" />
+			</index>
+		</table>
+		<table name="Grades" >
+			<column name="grades_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="grade_value" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" unsigned="y" />
+			<column name="description" type="varchar" length="45" decimal="0" jt="12" />
+			<index name="pk_grades" unique="PRIMARY_KEY" >
+				<column name="grades_id" />
+			</index>
+		</table>
+		<table name="Professional_experience" >
+			<column name="professional_experience_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="from" type="date" length="10" decimal="0" jt="91" />
+			<column name="to" type="date" length="10" decimal="0" jt="91" />
+			<column name="position" type="varchar" length="45" decimal="0" jt="12" />
+			<column name="users" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="organization" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_professional_experience" unique="PRIMARY_KEY" >
+				<column name="professional_experience_id" />
+			</index>
+			<index name="idx_professional_experience" unique="NORMAL" >
+				<column name="users" />
+			</index>
+			<index name="idx_professional_experience_0" unique="NORMAL" >
+				<column name="organization" />
+			</index>
+			<fk name="fk_professional_experience" to_schema="application" to_table="Users" >
+				<fk_column name="users" pk="user_id" />
+			</fk>
+			<fk name="fk_professional_experience_0" to_schema="application" to_table="organizations" >
+				<fk_column name="organization" pk="organization_id" />
+			</fk>
+		</table>
+		<table name="Skills" >
+			<column name="skills_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="name" type="varchar" length="40" jt="12" mandatory="y" />
+			<column name="description" type="varchar" length="200" jt="12" mandatory="y" />
+			<index name="pk_skills" unique="PRIMARY_KEY" >
+				<column name="skills_id" />
+			</index>
+		</table>
+		<table name="Tasks" >
+			<column name="tasks_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="task_name" type="varchar" length="45" decimal="0" jt="12" />
+			<index name="pk_tasks" unique="PRIMARY_KEY" >
+				<column name="tasks_id" />
+			</index>
+		</table>
+		<table name="Users" >
+			<column name="user_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="forename" type="varchar" length="40" jt="12" mandatory="y" />
+			<column name="surname" type="varchar" length="40" jt="12" mandatory="y" />
+			<column name="birthdate" type="date" jt="91" mandatory="y" />
+			<column name="gender" type="char" length="1" jt="1" mandatory="y" />
+			<index name="pk_users" unique="PRIMARY_KEY" >
+				<column name="user_id" />
+			</index>
+			<index name="idx_users" unique="NORMAL" >
+				<column name="gender" />
+			</index>
+			<fk name="fk_users" to_schema="application" to_table="gender" >
+				<fk_column name="gender" pk="gender_id" />
+			</fk>
+		</table>
+		<table name="education" >
+			<column name="education_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<index name="pk_education" unique="PRIMARY_KEY" >
+				<column name="education_id" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="email_address_user_intermediate" >
+			<column name="email" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="user" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="idx_email_address_user_intermediate" unique="NORMAL" >
+				<column name="user" />
+			</index>
+			<index name="idx_email_address_user_intermediate_0" unique="PRIMARY_KEY" >
+				<column name="email" />
+			</index>
+			<index name="pk_email_address_user_intermediate" unique="PRIMARY_KEY" >
+				<column name="email" />
+			</index>
+			<fk name="fk_email_address_user_intermediate" to_schema="application" to_table="Users" >
+				<fk_column name="user" pk="user_id" />
+			</fk>
+			<fk name="fk_email_address_user_intermediate_0" to_schema="application" to_table="email_addresses" >
+				<fk_column name="email" pk="email_id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="email_addresses" >
+			<column name="email_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="email_address" type="varchar" length="40" jt="12" mandatory="y" />
+			<index name="idx_email_addresses" unique="PRIMARY_KEY" >
+				<column name="email_id" />
+			</index>
+			<index name="pk_email_addresses" unique="PRIMARY_KEY" >
+				<column name="email_id" />
+			</index>
+			<index name="idx_email_address" unique="UNIQUE" >
+				<column name="email_address" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="gender" >
+			<column name="gender_id" type="char" length="1" jt="1" mandatory="y" />
+			<column name="name" type="varchar" length="13" jt="12" mandatory="y" />
+			<index name="pk_gender" unique="PRIMARY_KEY" >
+				<column name="gender_id" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="graduation" >
+			<column name="graduation_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="name" type="varchar" length="40" jt="12" mandatory="y" />
+			<column name="description" type="varchar" length="200" jt="12" mandatory="y" />
+			<index name="pk_graduation" unique="PRIMARY_KEY" >
+				<column name="graduation_id" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="instituition" >
+			<column name="institution_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="name" type="varchar" length="60" jt="12" />
+			<index name="pk_instituition" unique="PRIMARY_KEY" >
+				<column name="institution_id" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="institution_address_intermediate" >
+			<column name="institution_address_intermediate_id" type="int" length="100" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="address" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="institution" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_institution_address_intermediate" unique="PRIMARY_KEY" >
+				<column name="institution_address_intermediate_id" />
+			</index>
+			<index name="idx_institution_address_intermediate" unique="NORMAL" >
+				<column name="address" />
+			</index>
+			<index name="idx_institution_address_intermediate_0" unique="NORMAL" >
+				<column name="institution" />
+			</index>
+			<fk name="fk_institution_address_intermediate" to_schema="application" to_table="Address" >
+				<fk_column name="address" pk="address_id" />
+			</fk>
+			<fk name="fk_institution_address_intermediate_0" to_schema="application" to_table="instituition" >
+				<fk_column name="institution" pk="institution_id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="organizations" >
+			<column name="organization_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="name" type="varchar" length="100" jt="12" />
+			<column name="sector" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_organizations" unique="PRIMARY_KEY" >
+				<column name="organization_id" />
+			</index>
+			<index name="idx_organizations" unique="NORMAL" >
+				<column name="sector" />
+			</index>
+			<fk name="fk_organizations" to_schema="application" to_table="sectors" >
+				<fk_column name="sector" pk="sector_id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="professional_experience_tasks_intermediate" >
+			<column name="professional_experience_tasks_intermediate_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="task" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="professional_experience" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_professional_experience_tasks_intermediate" unique="PRIMARY_KEY" >
+				<column name="professional_experience_tasks_intermediate_id" />
+			</index>
+			<index name="idx_professional_experience_tasks_intermediate" unique="NORMAL" >
+				<column name="task" />
+			</index>
+			<index name="idx_professional_experience_tasks_intermediate_0" unique="NORMAL" >
+				<column name="professional_experience" />
+			</index>
+			<fk name="fk_professional_experience_tasks_intermediate_0" to_schema="application" to_table="Professional_experience" >
+				<fk_column name="professional_experience" pk="professional_experience_id" />
+			</fk>
+			<fk name="fk_professional_experience_tasks_intermediate" to_schema="application" to_table="Tasks" >
+				<fk_column name="task" pk="tasks_id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="sectors" >
+			<column name="sector_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="name" type="varchar" length="100" jt="12" />
+			<column name="description" type="varchar" length="200" jt="12" />
+			<index name="pk_sectors" unique="PRIMARY_KEY" >
+				<column name="sector_id" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="social_platforms" >
+			<column name="social_platforms_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="name" type="varchar" length="40" jt="12" mandatory="y" />
+			<column name="platform_type" type="varchar" length="40" jt="12" mandatory="y" />
+			<index name="pk_social_plattforms" unique="PRIMARY_KEY" >
+				<column name="social_platforms_id" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="user_address_intermediate" >
+			<column name="user_address_intermediate_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="addresses" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="users" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_user_address_intermediate" unique="PRIMARY_KEY" >
+				<column name="user_address_intermediate_id" />
+			</index>
+			<index name="idx_user_address_intermediate" unique="UNIQUE" >
+				<column name="addresses" />
+			</index>
+			<index name="idx_user_address_intermediate_0" unique="UNIQUE" >
+				<column name="users" />
+			</index>
+			<fk name="fk_user_address_intermediate" to_schema="application" to_table="Address" >
+				<fk_column name="addresses" pk="address_id" />
+			</fk>
+			<fk name="fk_user_address_intermediate_0" to_schema="application" to_table="Users" >
+				<fk_column name="users" pk="user_id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="user_social_platforms_intermediate" >
+			<column name="user_social_platforms_intermediate_id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="user" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="social_platform" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_user_social_platforms_intermediate" unique="PRIMARY_KEY" >
+				<column name="user_social_platforms_intermediate_id" />
+			</index>
+			<index name="idx_user_social_platforms_intermediate" unique="NORMAL" >
+				<column name="user" />
+			</index>
+			<index name="idx_user_social_platforms_intermediate_0" unique="NORMAL" >
+				<column name="social_platform" />
+			</index>
+			<fk name="fk_user_social_platforms_intermediate" to_schema="application" to_table="Users" >
+				<fk_column name="user" pk="user_id" />
+			</fk>
+			<fk name="fk_user_social_platforms_intermediate_0" to_schema="application" to_table="social_platforms" >
+				<fk_column name="social_platform" pk="social_platforms_id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="users_skills_intermediate" >
+			<column name="id" type="int" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="users" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="skills" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" />
+			<column name="grade" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_users_skills_intermediate" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_users_skills_intermediate" unique="NORMAL" >
+				<column name="users" />
+			</index>
+			<index name="idx_users_skills_intermediate_0" unique="NORMAL" >
+				<column name="skills" />
+			</index>
+			<index name="idx_users_skills_intermediate_1" unique="NORMAL" >
+				<column name="grade" />
+			</index>
+			<fk name="fk_users_skills_intermediate" to_schema="application" to_table="Users" >
+				<fk_column name="users" pk="user_id" />
+			</fk>
+			<fk name="fk_users_skills_intermediate_0" to_schema="application" to_table="Skills" >
+				<fk_column name="skills" pk="skills_id" />
+			</fk>
+			<fk name="fk_users_skills_intermediate_1" to_schema="application" to_table="Grades" >
+				<fk_column name="grade" pk="grades_id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+	</schema>
+	<connector name="MySql" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.25-bin.jar" host="localhost" port="3306" user="root" schema_mapping="" />
+	<layout id="Layout3900696" name="application" show_relation_columns="y" >
+		<entity schema="application" name="social_platforms" color="b2cdf7" x="1305" y="45" />
+		<entity schema="application" name="organizations" color="b2cdf7" x="990" y="225" />
+		<entity schema="application" name="user_social_platforms_intermediate" color="b2cdf7" x="750" y="60" />
+		<entity schema="application" name="users_skills_intermediate" color="b2cdf7" x="300" y="390" />
+		<entity schema="application" name="Skills" color="f5ddbf" x="345" y="540" />
+		<entity schema="application" name="user_address_intermediate" color="b2cdf7" x="210" y="240" />
+		<entity schema="application" name="email_address_user_intermediate" color="b2cdf7" x="315" y="60" />
+		<entity schema="application" name="email_addresses" color="b2cdf7" x="120" y="60" />
+		<entity schema="application" name="Professional_experience" color="f5ddbf" x="690" y="240" />
+		<entity schema="application" name="professional_experience_tasks_intermediate" color="b2cdf7" x="810" y="435" />
+		<entity schema="application" name="Tasks" color="f5ddbf" x="1200" y="450" />
+		<entity schema="application" name="sectors" color="b2cdf7" x="1215" y="285" />
+		<entity schema="application" name="Grades" color="f5ddbf" x="120" y="435" />
+		<entity schema="application" name="Address" color="f5ddbf" x="45" y="195" />
+		<entity schema="application" name="institution_address_intermediate" color="b2cdf7" x="45" y="675" />
+		<entity schema="application" name="instituition" color="b2cdf7" x="525" y="690" />
+		<entity schema="application" name="Users" color="f5ddbf" x="510" y="270" />
+		<entity schema="application" name="graduation" color="b2cdf7" x="1215" y="675" />
+		<entity schema="application" name="education" color="b2cdf7" x="1005" y="585" />
+		<entity schema="application" name="gender" color="b2cdf7" x="690" y="420" />
+		<browser id="Browse7010656" name="Address" >
+			<browse_table schema="application" entity="Address" x="10" y="10" width="280" height="216" />
+		</browser>
+		<browser id="Browse6617293" name="ID_Users" >
+			<browse_table schema="application" entity="Address" x="10" y="10" width="200" height="200" />
+		</browser>
+		<browser id="Browse3979181" name="Users" >
+			<browse_table schema="application" entity="Users" x="10" y="10" width="451" height="347" />
+		</browser>
+		<browser id="Browse5398249" name="Users_001" >
+			<browse_table schema="application" entity="Users" x="10" y="10" width="280" height="216" />
+		</browser>
+		<browser id="Browse5445137" name="email_address_user_intermediate" >
+			<browse_table schema="application" entity="email_address_user_intermediate" x="10" y="10" width="200" height="200" />
+		</browser>
+		<browser id="Browse5456290" name="email_address_user_intermediate_001" >
+			<browse_table schema="application" entity="email_address_user_intermediate" x="10" y="10" width="247" height="200" />
+		</browser>
+		<browser id="Browse4827302" name="email_addresses" >
+			<browse_table schema="application" entity="email_addresses" x="10" y="10" width="200" height="200" />
+		</browser>
+	</layout>
+</project>
