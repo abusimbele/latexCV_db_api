@@ -93,6 +93,7 @@
 				<comment><![CDATA[ToDo: realtion to other table?]]></comment>
 			</column>
 			<column name="user" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="subject_area" type="varchar" length="40" jt="12" />
 			<index name="pk_education" unique="PRIMARY_KEY" >
 				<column name="education_id" />
 			</index>
@@ -326,26 +327,61 @@
 	</schema>
 	<connector name="MySql" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.25-bin.jar" host="localhost" port="3306" user="root" schema_mapping="" />
 	<layout id="Layout3900696" name="application" show_relation_columns="y" >
-		<entity schema="application" name="organizations" color="b2cdf7" x="1005" y="210" />
-		<entity schema="application" name="user_social_platforms_intermediate" color="b2cdf7" x="765" y="45" />
-		<entity schema="application" name="email_address_user_intermediate" color="b2cdf7" x="330" y="45" />
-		<entity schema="application" name="email_addresses" color="b2cdf7" x="135" y="45" />
-		<entity schema="application" name="Professional_experience" color="f5ddbf" x="705" y="225" />
-		<entity schema="application" name="professional_experience_tasks_intermediate" color="b2cdf7" x="825" y="420" />
-		<entity schema="application" name="Tasks" color="f5ddbf" x="1215" y="435" />
-		<entity schema="application" name="sectors" color="b2cdf7" x="1230" y="270" />
-		<entity schema="application" name="gender" color="b2cdf7" x="690" y="405" />
-		<entity schema="application" name="social_platforms" color="b2cdf7" x="1185" y="45" />
-		<entity schema="application" name="user_address_intermediate" color="b2cdf7" x="240" y="210" />
-		<entity schema="application" name="users_skills_intermediate" color="b2cdf7" x="360" y="405" />
-		<entity schema="application" name="Grades" color="f5ddbf" x="225" y="360" />
-		<entity schema="application" name="Skills" color="f5ddbf" x="225" y="465" />
-		<entity schema="application" name="Address" color="f5ddbf" x="45" y="255" />
-		<entity schema="application" name="Users" color="f5ddbf" x="525" y="255" />
-		<entity schema="application" name="graduation" color="b2cdf7" x="255" y="810" />
-		<entity schema="application" name="instituition" color="b2cdf7" x="510" y="645" />
-		<entity schema="application" name="institution_type" color="b2cdf7" x="225" y="690" />
-		<entity schema="application" name="education" color="b2cdf7" x="780" y="600" />
+		<entity schema="application" name="Professional_experience" color="f5ddbf" x="750" y="210" />
+		<entity schema="application" name="Tasks" color="f5ddbf" x="1155" y="45" />
+		<entity schema="application" name="sectors" color="b2cdf7" x="1230" y="225" />
+		<entity schema="application" name="organizations" color="b2cdf7" x="1035" y="225" />
+		<entity schema="application" name="email_addresses" color="b2cdf7" x="150" y="645" />
+		<entity schema="application" name="social_platforms" color="b2cdf7" x="75" y="780" />
+		<entity schema="application" name="Skills" color="f5ddbf" x="45" y="405" />
+		<entity schema="application" name="Grades" color="f5ddbf" x="60" y="285" />
+		<entity schema="application" name="Users" color="f5ddbf" x="690" y="450" />
+		<entity schema="application" name="education" color="b2cdf7" x="810" y="795" />
+		<entity schema="application" name="instituition" color="b2cdf7" x="1035" y="810" />
+		<entity schema="application" name="institution_type" color="b2cdf7" x="1290" y="870" />
+		<entity schema="application" name="graduation" color="b2cdf7" x="1215" y="990" />
+		<entity schema="application" name="user_address_intermediate" color="b2cdf7" x="1080" y="555" />
+		<entity schema="application" name="gender" color="b2cdf7" x="1110" y="465" />
+		<entity schema="application" name="Address" color="f5ddbf" x="1350" y="465" />
+		<entity schema="application" name="email_address_user_intermediate" color="b2cdf7" x="330" y="630" />
+		<entity schema="application" name="user_social_platforms_intermediate" color="b2cdf7" x="300" y="765" />
+		<entity schema="application" name="users_skills_intermediate" color="b2cdf7" x="225" y="360" />
+		<entity schema="application" name="professional_experience_tasks_intermediate" color="b2cdf7" x="795" y="45" />
+		<callout x="45" y="210" pointer="SV" >
+			<comment><![CDATA[super-skill: LEARNING    -> flexibel (like a general purpose PC) -> every skill can be learned! (needs time & errors)]]></comment>
+		</callout>
+		<group name="Group_Education" color="d42f2f" >
+			<entity schema="application" name="education" />
+			<entity schema="application" name="graduation" />
+			<entity schema="application" name="institution_type" />
+			<entity schema="application" name="instituition" />
+		</group>
+		<group name="Group_Jobs" color="335ccb" >
+			<entity schema="application" name="Professional_experience" />
+			<entity schema="application" name="organizations" />
+			<entity schema="application" name="sectors" />
+			<entity schema="application" name="Tasks" />
+			<entity schema="application" name="professional_experience_tasks_intermediate" />
+		</group>
+		<group name="Group_Online" color="c4e0f9" >
+			<entity schema="application" name="email_addresses" />
+			<entity schema="application" name="social_platforms" />
+			<entity schema="application" name="email_address_user_intermediate" />
+			<entity schema="application" name="user_social_platforms_intermediate" />
+		</group>
+		<group name="Group_Facts_Offline" color="26d354" >
+			<entity schema="application" name="gender" />
+			<entity schema="application" name="Address" />
+			<entity schema="application" name="user_address_intermediate" />
+		</group>
+		<group name="Group_SKILLS" color="ccb530" >
+			<entity schema="application" name="Skills" />
+			<entity schema="application" name="Grades" />
+			<entity schema="application" name="users_skills_intermediate" />
+		</group>
+		<group name="Group_ROOT" color="e70925" >
+			<entity schema="application" name="Users" />
+		</group>
 		<browser id="Browse7010656" name="Address" >
 			<browse_table schema="application" entity="Address" x="10" y="10" width="280" height="216" />
 		</browser>
