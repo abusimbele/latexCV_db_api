@@ -335,7 +335,6 @@
 		<entity schema="application" name="social_platforms" color="b2cdf7" x="75" y="780" />
 		<entity schema="application" name="Skills" color="f5ddbf" x="45" y="405" />
 		<entity schema="application" name="Grades" color="f5ddbf" x="60" y="285" />
-		<entity schema="application" name="Users" color="f5ddbf" x="690" y="450" />
 		<entity schema="application" name="education" color="b2cdf7" x="810" y="795" />
 		<entity schema="application" name="instituition" color="b2cdf7" x="1035" y="810" />
 		<entity schema="application" name="institution_type" color="b2cdf7" x="1290" y="870" />
@@ -347,6 +346,7 @@
 		<entity schema="application" name="user_social_platforms_intermediate" color="b2cdf7" x="300" y="765" />
 		<entity schema="application" name="users_skills_intermediate" color="b2cdf7" x="225" y="360" />
 		<entity schema="application" name="professional_experience_tasks_intermediate" color="b2cdf7" x="795" y="45" />
+		<entity schema="application" name="Users" color="f5ddbf" x="690" y="450" />
 		<callout x="45" y="210" pointer="SV" >
 			<comment><![CDATA[super-skill: LEARNING    -> flexibel (like a general purpose PC) -> every skill can be learned! (needs time & errors)]]></comment>
 		</callout>

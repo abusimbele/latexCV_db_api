@@ -1,0 +1,8 @@
+"http://community.opscode.com"
+
+cookbook 'postgresql', '~> 3.4.2'
+cookbook 'django', '~> 0.8.0'
+cookbook 'apt'
+cookbook 'build-essential'
+cookbook 'vim'
+
