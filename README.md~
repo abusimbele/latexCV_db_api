@@ -2,3 +2,26 @@ latexCV_db_api
 ==============
 
 Write your Curriculum vitae(CV) with latex filled with your data from xing or linkedin (API usage)
+
+We will use Vagrant for better development in terms of portability, reproducibility and productivity.
+For the backend / webservice we will use Ruby & Rails with a gem for OAuth (Authentification for the Xing API).
+Our frontend will be ether programmed python or  Ruby & Rails. 
+
+ 
+
+
+
+
+------------------------------------------------------------------------------------
+
+(\ === /)   
+( \(o)/ )     
+ ( / \ )      
+  ([|])
+   / \        
+  /   \       
+  ~~~~~
+
+Want a cookie?
+
+------------------------------------------------------------------------------------
